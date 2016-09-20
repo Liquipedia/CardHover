@@ -100,6 +100,11 @@ class CardHover {
 		}
 		return $parser;
 	}
+
+	public static function onBeforePageDisplay( $out, $skin ) {
+		$out->addModules( 'ext.cardHover' );
+		return true;
+	}
 }
 
 

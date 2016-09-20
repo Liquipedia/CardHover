@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Philip Becker-Ehmck"
+		]
+	},
+	"cardhover-desc": "This extension generates hover images for internal links to card pages."
+}

@@ -1,0 +1,47 @@
+{
+	"name": "Card Hover",
+	"version": "1.1",
+	"author": [
+		"PhiLtheFisH",
+		"Alex Winkler"
+	],
+	"url": "http://wiki.teamliquid.net/",
+	"descriptionmsg": "cardhover-desc",
+	"license-name": "MIT",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.25.0"
+	},
+	"MessagesDirs": {
+		"CardHover": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"CardHover": "CardHover.php"
+	},
+	"Hooks": {
+		"ParserBeforeInternalParse": [
+			"CardHover::onParserBeforeInternalParse"
+		],
+		"BeforePageDisplay": [
+			"CardHover::onBeforePageDisplay"
+		]
+	},
+	"ResourceModules": {
+		"ext.cardHover": {
+			"scripts": [
+				"CardHover.js"
+			],
+			"styles": [
+				"CardHover.css"
+			],
+			"position": "top"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "CardHover"
+	},
+	"manifest_version": 1
+}

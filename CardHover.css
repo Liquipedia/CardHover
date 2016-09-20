@@ -1,0 +1,5 @@
+/* Hover cards */
+#hoverimage {
+	position: absolute;
+	z-index: 100;
+}
