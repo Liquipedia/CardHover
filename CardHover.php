@@ -4,18 +4,6 @@ if (!defined('MEDIAWIKI')) {
 	die();
 }
 
-$wgExtensionCredits['parserhook'][] = array(
-								'path'           => __FILE__,
-								'name'           => 'Card Hover',
-								'version'        => '1.0',
-								'author'         => 'PhiLtheFisH',
-								'descriptionmsg' => 'cardhover-desc'
-);
-
-$wgExtensionMessagesFiles['CardHover'] = dirname( __FILE__ ) . '/CardHover.i18n.php';
-
-$wgHooks['ParserBeforeInternalParse'][] = 'CardHover::onParserBeforeInternalParse';
-
 class CardHover {
 
 	public static $executed = false;
@@ -106,6 +94,5 @@ class CardHover {
 		return true;
 	}
 }
-
 
 ?>
