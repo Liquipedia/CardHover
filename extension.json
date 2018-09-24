@@ -5,7 +5,7 @@
 		"PhiLtheFisH",
 		"[https://fo-nttax.de Alex Winkler]"
 	],
-	"url": "http://liquipedia.net",
+	"url": "https://liquipedia.net",
 	"descriptionmsg": "cardhover-desc",
 	"license-name": "MIT",
 	"type": "parserhook",
