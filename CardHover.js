@@ -5,7 +5,7 @@ $( document ).ready( function() {
 		if ( imagelink ) {
 			imagelink = imagelink.replace( ' ', '_' );
 			var left = $( this ).position().left + 20;
-			var top = $( this ).position().top + 20;
+			var top = $( this ).position().top + 50;
 			if ( ( $( window ).width() - ( left + 480 ) ) < 0 ) {
 				left = left - 280;
 			}
