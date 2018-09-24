@@ -18,14 +18,14 @@
 		]
 	},
 	"AutoloadClasses": {
-		"CardHover": "CardHover.php"
+		"Liquipedia\\CardHover\\Hooks": "Hooks.php"
 	},
 	"Hooks": {
 		"ParserBeforeInternalParse": [
-			"CardHover::onParserBeforeInternalParse"
+			"Liquipedia\\CardHover\\Hooks::onParserBeforeInternalParse"
 		],
 		"BeforePageDisplay": [
-			"CardHover::onBeforePageDisplay"
+			"Liquipedia\\CardHover\\Hooks::onBeforePageDisplay"
 		]
 	},
 	"ResourceModules": {

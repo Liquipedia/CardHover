@@ -1,12 +1,12 @@
 <?php
 
-if ( !defined( 'MEDIAWIKI' ) ) {
-	die();
-}
+namespace Liquipedia\CardHover;
 
-class CardHover {
+use Parser;
 
-	public static $executed = false;
+class Hooks {
+
+	private static $executed = false;
 
 	public static function onParserBeforeInternalParse( Parser &$parser, &$text ) {
 		global $wgDBprefix;
