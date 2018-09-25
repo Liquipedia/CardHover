@@ -24,7 +24,7 @@
 		"BeforePageDisplay": [
 			"Liquipedia\\CardHover\\Hooks::onBeforePageDisplay"
 		],
-		"HtmlPageLinkRendererBegin2": [
+		"HtmlPageLinkRendererBegin": [
 			"Liquipedia\\CardHover\\Hooks::onHtmlPageLinkRendererBegin"
 		]
 	},

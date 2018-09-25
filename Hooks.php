@@ -14,10 +14,9 @@ class Hooks {
 	private static function getFilePath( $target ) {
 		$text = $target->getText();
 		if ( !array_key_exists( $text, self::$filePaths ) ) {
-			global $wgParser;
-			$parser = clone $wgParser;
-			$result = $parser->parse( '{{#show:' . $target->getText() . '|?has filepath|link=none}}', $target, $parser->getOptions(), false );
-			preg_match_all( '/<p>(.*?)<\/p>/', $result->getRawText(), $matches );
+			global $wgOut;
+			$result = $wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' );
+			preg_match_all( '/<p>(.*?)<\/p>/m', $result, $matches );
 			if ( isset( $matches[ 1 ] ) && isset( $matches[ 1 ][ 0 ] ) ) {
 				self::$filePaths[ $text ] = $matches[ 1 ][ 0 ];
 			} else {
