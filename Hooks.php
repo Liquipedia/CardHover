@@ -2,7 +2,6 @@
 
 namespace Liquipedia\CardHover;
 
-use Parser;
 use MediaWiki\Linker\LinkRenderer;
 use MWNamespace;
 use Title;
