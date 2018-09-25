@@ -1,6 +1,6 @@
 {
 	"name": "Card Hover",
-	"version": "1.1",
+	"version": "1.2.0",
 	"author": [
 		"PhiLtheFisH",
 		"[https://fo-nttax.de Alex Winkler]"
@@ -21,11 +21,11 @@
 		"Liquipedia\\CardHover\\Hooks": "Hooks.php"
 	},
 	"Hooks": {
-		"ParserBeforeInternalParse": [
-			"Liquipedia\\CardHover\\Hooks::onParserBeforeInternalParse"
-		],
 		"BeforePageDisplay": [
 			"Liquipedia\\CardHover\\Hooks::onBeforePageDisplay"
+		],
+		"HtmlPageLinkRendererBegin": [
+			"Liquipedia\\CardHover\\Hooks::onHtmlPageLinkRendererBegin"
 		]
 	},
 	"ResourceModules": {
