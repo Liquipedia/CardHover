@@ -21,10 +21,10 @@
 		"Liquipedia\\CardHover\\Hooks": "Hooks.php"
 	},
 	"Hooks": {
-		"BeforePageDisplay2": [
+		"BeforePageDisplay": [
 			"Liquipedia\\CardHover\\Hooks::onBeforePageDisplay"
 		],
-		"HtmlPageLinkRendererBegin": [
+		"HtmlPageLinkRendererBegin2": [
 			"Liquipedia\\CardHover\\Hooks::onHtmlPageLinkRendererBegin"
 		]
 	},
