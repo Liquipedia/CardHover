@@ -27,6 +27,11 @@
 					card.parentNode.removeChild( card );
 				} );
 			} );
+			card.addEventListener( 'wheel', function() {
+				document.querySelectorAll( '.hoverimage' ).forEach( function( card ) {
+					card.parentNode.removeChild( card );
+				} );
+			} );
 		} );
 	}
 	if ( document.readyState === 'loading' ) {
