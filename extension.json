@@ -1,6 +1,6 @@
 {
 	"name": "Card Hover",
-	"version": "1.2.0",
+	"version": "1.3.0",
 	"author": [
 		"PhiLtheFisH",
 		"[https://fo-nttax.de Alex Winkler]"
@@ -36,7 +36,7 @@
 			"styles": [
 				"CardHover.css"
 			],
-			"position": "top"
+			"position": "bottom"
 		}
 	},
 	"ResourceFileModulePaths": {

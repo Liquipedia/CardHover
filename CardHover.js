@@ -1,23 +1,32 @@
 /* Card Hover */
-$( document ).ready( function() {
-	$( '.hovercard' ).hover( function() {
-		var imagelink = $( this ).attr( 'data-img' );
-		if ( imagelink ) {
-			imagelink = imagelink.replace( ' ', '_' );
-			var left = $( this ).position().left + 20;
-			var top = $( this ).position().top + 50;
-			if ( ( $( window ).width() - ( left + 480 ) ) < 0 ) {
-				left = left - 280;
-			}
-			if ( ( ( $( this ).offset().top + 20 ) - $( window ).scrollTop() ) > ( $( window ).height() / 2 ) ) {
-				top = top - 416;
-			}
-			var imagediv = $( '<div id="hoverimage"><img src="' + imagelink + '"></div>' );
-			$( this ).append( imagediv );
-			imagediv.css( 'top', top );
-			imagediv.css( 'left', left );
-		}
-	}, function() {
-		$( '#hoverimage' ).remove();
+( function( window, document, Math ) {
+	window.addEventListener( 'DOMContentLoaded', function() {
+		document.querySelectorAll( '.hovercard' ).forEach( function( card ) {
+			var link = card.dataset.img.replace( '&#58;', ':' );
+			card.addEventListener( 'mouseover', function() {
+				var position = card.getBoundingClientRect();
+				var top = position.top + 50;
+				var left = position.left + 20;
+				if ( position.top + 50 > ( window.innerHeight / 2 ) ) {
+					top = top - 446;
+				}
+				if ( ( window.innerWidth - ( left + 480 ) ) < 0 ) {
+					left = left - 280;
+				}
+				var img = document.createElement( 'img' );
+				img.src = link;
+				var div = document.createElement( 'div' );
+				div.classList.add( 'hoverimage' );
+				div.appendChild( img );
+				div.style.top = Math.round( top ).toString() + 'px';
+				div.style.left = Math.round( left ).toString() + 'px';
+				card.appendChild( div );
+			} );
+			card.addEventListener( 'mouseleave', function() {
+				document.querySelectorAll( '.hoverimage' ).forEach( function( card ) {
+					card.parentNode.removeChild( card );
+				} );
+			} );
+		} );
 	} );
-} );
+}( window, document, Math ) );
