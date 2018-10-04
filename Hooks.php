@@ -17,7 +17,7 @@ class Hooks {
 			$result = $wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' );
 			preg_match_all( '/<p>(.*?)<\/p>/m', $result, $matches );
 			if ( isset( $matches[ 1 ] ) && isset( $matches[ 1 ][ 0 ] ) ) {
-				self::$filePaths[ $text ] = $matches[ 1 ][ 0 ];
+				self::$filePaths[ $text ] = str_replace( '&#58;', ':', $matches[ 1 ][ 0 ] );
 			} else {
 				self::$filePaths[ $text ] = '';
 			}

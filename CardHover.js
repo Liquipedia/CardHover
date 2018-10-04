@@ -2,7 +2,7 @@
 ( function( window, document, Math ) {
 	function cardhover() {
 		document.querySelectorAll( '.hovercard' ).forEach( function( card ) {
-			var link = card.dataset.img.replace( '&#58;', ':' );
+			var link = card.dataset.img;
 			card.addEventListener( 'mouseover', function() {
 				if ( document.querySelector( '.hoverimage' ) !== null ) {
 					var position = card.getBoundingClientRect();
