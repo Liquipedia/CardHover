@@ -29,7 +29,6 @@
 			} );
 		} );
 	}
-	console.log( document.readyState );
 	if ( document.readyState === 'loading' ) {
 		window.addEventListener( 'DOMContentLoaded', cardhover );
 	} else {
