@@ -1,6 +1,6 @@
 /* Card Hover */
 ( function( window, document, Math ) {
-	window.addEventListener( 'DOMContentLoaded', function() {
+	function cardhover() {
 		document.querySelectorAll( '.hovercard' ).forEach( function( card ) {
 			var link = card.dataset.img.replace( '&#58;', ':' );
 			card.addEventListener( 'mouseover', function() {
@@ -28,5 +28,11 @@
 				} );
 			} );
 		} );
-	} );
+	}
+	console.log( document.readyState );
+	if ( document.readyState === 'loading' ) {
+		window.addEventListener( 'DOMContentLoaded', cardhover );
+	} else {
+		cardhover();
+	}
 }( window, document, Math ) );
