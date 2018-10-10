@@ -8,9 +8,9 @@
 				var top = position.top + 50;
 				var left = position.left + 20;
 				if ( position.top + 50 > ( window.innerHeight / 2 ) ) {
-					top = top - 446;
+					top = top - 486;
 				}
-				if ( ( window.innerWidth - ( left + 540 ) ) < 0 ) {
+				if ( ( window.innerWidth - ( left + 480 ) ) < 0 ) {
 					left = left - 280;
 				}
 				var img = document.createElement( 'img' );
