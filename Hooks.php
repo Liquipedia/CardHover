@@ -15,9 +15,15 @@ class Hooks {
 		if ( !array_key_exists( $text, self::$filePaths ) ) {
 			global $wgOut;
 			$result = $wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' );
-			preg_match_all( '/<p>(.*?)<\/p>/m', $result, $matches );
-			if ( isset( $matches[ 1 ] ) && isset( $matches[ 1 ][ 0 ] ) ) {
-				self::$filePaths[ $text ] = str_replace( '&#58;', ':', $matches[ 1 ][ 0 ] );
+			if ( strpos( '<p>', $result ) !== false ) {
+				preg_match_all( '/<p>(.*?)<\/p>/m', $result, $matches );
+				if ( isset( $matches[ 1 ] ) && isset( $matches[ 1 ][ 0 ] ) ) {
+					$result = $matches[ 1 ][ 0 ];
+				}
+			}
+			$result = str_replace( '&#58;', ':', $result );
+			if ( !empty( $result ) ) {
+				self::$filePaths[ $text ] = $result;
 			} else {
 				self::$filePaths[ $text ] = '';
 			}
