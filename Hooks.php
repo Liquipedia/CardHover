@@ -38,6 +38,20 @@ class Hooks {
 		}
 	}
 
+	public static function onLinkerMakeMediaLinkFile( $title, $file, &$html, &$attribs, &$ret ) {
+		if ( $title instanceof Title && $title->getNamespace() === NS_MAIN && $title->exists() && in_array( MWNamespace::getCanonicalName( NS_CATEGORY ) . ':Cards', array_keys( $title->getParentCategories() ) ) ) {
+			$url = self::getFilePath( $title );
+			if ( !empty( $url ) ) {
+				$attribs[ 'data-img' ] = $url;
+				if ( array_key_exists( 'class', $extraAttribs ) ) {
+					$attribs[ 'class' ] .= ' hovercard';
+				} else {
+					$attribs[ 'class' ] = 'hovercard';
+				}
+			}
+		}
+	}
+
 	public static function onBeforePageDisplay( $out, $skin ) {
 		$out->addModules( 'ext.cardHover' );
 		return true;

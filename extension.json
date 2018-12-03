@@ -26,6 +26,9 @@
 		],
 		"HtmlPageLinkRendererBegin": [
 			"Liquipedia\\CardHover\\Hooks::onHtmlPageLinkRendererBegin"
+		],
+		"LinkerMakeMediaLinkFile": [
+			"Liquipedia\\CardHover\\Hooks::onLinkerMakeMediaLinkFile"
 		]
 	},
 	"ResourceModules": {
