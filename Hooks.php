@@ -38,15 +38,16 @@ class Hooks {
 		}
 	}
 
-	public static function onLinkerMakeMediaLinkFile( $title, $file, &$html, &$attribs, &$ret ) {
-		if ( $title instanceof Title && $title->getNamespace() === NS_MAIN && $title->exists() && in_array( MWNamespace::getCanonicalName( NS_CATEGORY ) . ':Cards', array_keys( $title->getParentCategories() ) ) ) {
-			$url = self::getFilePath( $title );
+	public static function onThumbnailBeforeProduceHTML( $thumbnail, &$attribs, &$linkAttribs ) {
+		$target = Title::newFromText( $linkAttribs[ 'title' ], NS_MAIN );
+		if ( $target instanceof Title && $target->getNamespace() === NS_MAIN && $target->exists() && in_array( MWNamespace::getCanonicalName( NS_CATEGORY ) . ':Cards', array_keys( $target->getParentCategories() ) ) ) {
+			$url = self::getFilePath( $target );
 			if ( !empty( $url ) ) {
-				$attribs[ 'data-img' ] = $url;
-				if ( array_key_exists( 'class', $extraAttribs ) ) {
-					$attribs[ 'class' ] .= ' hovercard';
+				$linkAttribs[ 'data-img' ] = $url;
+				if ( array_key_exists( 'class', $linkAttribs ) ) {
+					$linkAttribs[ 'class' ] .= ' hovercard';
 				} else {
-					$attribs[ 'class' ] = 'hovercard';
+					$linkAttribs[ 'class' ] = 'hovercard';
 				}
 			}
 		}
