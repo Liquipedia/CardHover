@@ -39,15 +39,17 @@ class Hooks {
 	}
 
 	public static function onThumbnailBeforeProduceHTML( $thumbnail, &$attribs, &$linkAttribs ) {
-		$target = Title::newFromText( $linkAttribs[ 'title' ], NS_MAIN );
-		if ( $target instanceof Title && $target->getNamespace() === NS_MAIN && $target->exists() && in_array( MWNamespace::getCanonicalName( NS_CATEGORY ) . ':Cards', array_keys( $target->getParentCategories() ) ) ) {
-			$url = self::getFilePath( $target );
-			if ( !empty( $url ) ) {
-				$linkAttribs[ 'data-img' ] = $url;
-				if ( array_key_exists( 'class', $linkAttribs ) ) {
-					$linkAttribs[ 'class' ] .= ' hovercard';
-				} else {
-					$linkAttribs[ 'class' ] = 'hovercard';
+		if ( is_array( $linkAttribs ) && array_key_exists( 'title', $linkAttribs ) ) {
+			$target = Title::newFromText( $linkAttribs[ 'title' ], NS_MAIN );
+			if ( $target instanceof Title && $target->getNamespace() === NS_MAIN && $target->exists() && in_array( MWNamespace::getCanonicalName( NS_CATEGORY ) . ':Cards', array_keys( $target->getParentCategories() ) ) ) {
+				$url = self::getFilePath( $target );
+				if ( !empty( $url ) ) {
+					$linkAttribs[ 'data-img' ] = $url;
+					if ( array_key_exists( 'class', $linkAttribs ) ) {
+						$linkAttribs[ 'class' ] .= ' hovercard';
+					} else {
+						$linkAttribs[ 'class' ] = 'hovercard';
+					}
 				}
 			}
 		}
