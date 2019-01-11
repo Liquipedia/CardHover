@@ -14,6 +14,12 @@
 					left = left - 280;
 				}
 				var img = document.createElement( 'img' );
+				img.style.width = 'initial';
+				img.style.maxWidth = 'initial';
+				img.style.minWidth = 'initial';
+				img.style.height = 'initial';
+				img.style.maxHeight = 'initial';
+				img.style.minHeight = 'initial';
 				img.src = link;
 				var div = document.createElement( 'div' );
 				div.classList.add( 'hoverimage' );
