@@ -11,10 +11,18 @@ class Hooks {
 	private static $filePaths = [];
 
 	private static function getFilePath( $target ) {
+		$config = \MediaWiki\MediaWikiServices::getInstance()->getMainConfig();
 		$text = $target->getText();
 		if ( !array_key_exists( $text, self::$filePaths ) ) {
 			global $wgOut;
-			$result = str_replace( '&#58;', ':', strip_tags( $wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' ) ) );
+			if ( $wgOut->getTitle()->getNamespace() >= NS_MAIN ) {
+				$result = str_replace( '&#58;', ':', strip_tags( $wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' ) ) );
+			} else {
+				$result = '';
+			}
+			if ( strpos( $result, $config->get( 'Server' ) ) !== 0 ) {
+				#$result = '';
+			}
 			if ( !empty( $result ) ) {
 				self::$filePaths[ $text ] = $result;
 			} else {
