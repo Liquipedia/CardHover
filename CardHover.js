@@ -3,7 +3,7 @@
 	function cardhover() {
 		document.querySelectorAll( '.hovercard' ).forEach( function( card ) {
 			var link = card.dataset.img;
-			if ( link.indexOf( mw.config.get( 'wgServer' ) ) === 0 ) {
+			if ( link.indexOf( mw.config.get( 'wgServer' ) + '/' ) === 0 ) {
 				card.addEventListener( 'mouseover', function() {
 					var position = card.getBoundingClientRect();
 					var top = position.top + 50;
