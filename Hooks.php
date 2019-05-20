@@ -21,7 +21,7 @@ class Hooks {
 				$result = '';
 			}
 			if ( strpos( $result, $config->get( 'Server' ) ) !== 0 ) {
-				#$result = '';
+				$result = '';
 			}
 			if ( !empty( $result ) ) {
 				self::$filePaths[ $text ] = $result;
