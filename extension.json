@@ -17,8 +17,8 @@
 			"i18n"
 		]
 	},
-	"AutoloadClasses": {
-		"Liquipedia\\CardHover\\Hooks": "Hooks.php"
+	"AutoloadNamespaces": {
+		"Liquipedia\\CardHover\\": "src/"
 	},
 	"Hooks": {
 		"BeforePageDisplay": [
