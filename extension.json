@@ -46,5 +46,16 @@
 		"localBasePath": "",
 		"remoteExtPath": "CardHover"
 	},
-	"manifest_version": 1
+	"config": {
+		"CardHoverWhitelistedPages": {
+			"value": [
+				"RuneterraDeck"
+			],
+			"path": false,
+			"description": "List of special pages that are whitelisted for card hover",
+			"descriptionmsg": "cardhover-config-cardhoverwhitelistedpages-desc",
+			"public": true
+		}
+	},
+	"manifest_version": 2
 }

@@ -4,5 +4,7 @@
 			"Philip Becker-Ehmck"
 		]
 	},
-	"cardhover-desc": "This extension generates hover images for internal links to card pages."
+	"cardhover-desc": "This extension generates hover images for internal links to card pages.",
+
+	"cardhover-config-cardhoverwhitelistedpages-desc": "List of special pages that are whitelisted for card hover"
 }

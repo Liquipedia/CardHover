@@ -15,10 +15,25 @@ class Hooks {
 		$text = $target->getText();
 		if ( !array_key_exists( $text, self::$filePaths ) ) {
 			global $wgOut;
-			if ( $wgOut->getTitle()->getNamespace() >= NS_MAIN ) {
+			$currentPageTitle = $wgOut->getTitle();
+			if ( $currentPageTitle->getNamespace() >= NS_MAIN ) {
 				$result = str_replace( '&#58;', ':', strip_tags( $wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' ) ) );
 			} else {
-				$result = '';
+				if ( $currentPageTitle->isSpecialPage() ) {
+					$done = false;
+					$whitelistedPages = $config->get( 'CardHoverWhitelistedPages' );
+					foreach ( $whitelistedPages as $page ) {
+						if ( $currentPageTitle->isSpecial( $page ) ) {
+							$result = str_replace( '&#58;', ':', strip_tags( $wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' ) ) );
+							$done = true;
+						}
+					}
+					if ( !$done ) {
+						$result = '';
+					}
+				} else {
+					$result = '';
+				}
 			}
 			if ( strpos( $result, $config->get( 'Server' ) ) !== 0 ) {
 				$result = '';
