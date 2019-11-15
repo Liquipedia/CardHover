@@ -62,10 +62,6 @@ class Hooks {
 	}
 
 	public static function onThumbnailBeforeProduceHTML( $thumbnail, &$attribs, &$linkAttribs ) {
-		#var_dump( $attribs );
-		#var_dump( $linkAttribs );
-		#var_dump( $thumbnail );
-		#die();
 		if ( is_array( $linkAttribs ) && array_key_exists( 'title', $linkAttribs ) ) {
 			$target = Title::newFromText( $linkAttribs[ 'title' ], NS_MAIN );
 			if ( $target instanceof Title && $target->getNamespace() === NS_MAIN && $target->exists() && in_array( MWNamespace::getCanonicalName( NS_CATEGORY ) . ':Cards', array_keys( $target->getParentCategories() ) ) ) {
