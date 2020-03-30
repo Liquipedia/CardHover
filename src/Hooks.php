@@ -16,7 +16,9 @@ class Hooks {
 		if ( !array_key_exists( $text, self::$filePaths ) ) {
 			global $wgOut;
 			$currentPageTitle = $wgOut->getTitle();
-			if ( $currentPageTitle->getNamespace() >= NS_MAIN ) {
+			if ( $currentPageTitle === null ) {
+				$result = '';
+			} elseif ( $currentPageTitle->getNamespace() >= NS_MAIN ) {
 				$result = str_replace( '&#58;', ':', strip_tags( $wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' ) ) );
 			} else {
 				if ( $currentPageTitle->isSpecialPage() ) {
