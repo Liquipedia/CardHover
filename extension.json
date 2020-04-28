@@ -1,6 +1,6 @@
 {
 	"name": "Card Hover",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"author": [
 		"PhiLtheFisH",
 		"[https://fo-nttax.de Alex Winkler]"
@@ -34,10 +34,10 @@
 	"ResourceModules": {
 		"ext.cardHover": {
 			"scripts": [
-				"resources/CardHover.js"
+				"resources/scripts/CardHover.js"
 			],
 			"styles": [
-				"resources/CardHover.css"
+				"resources/styles/CardHover.css"
 			],
 			"position": "bottom"
 		}
