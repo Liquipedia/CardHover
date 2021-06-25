@@ -25,7 +25,7 @@ class Hooks {
 				$result = '';
 			} elseif ( $currentPageTitle->getNamespace() >= NS_MAIN ) {
 				$result = str_replace( '&#58;', ':', strip_tags(
-						$wgOut->parseInline( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' )
+						$wgOut->parseInlineAsInterface( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' )
 					) );
 			} else {
 				if ( $currentPageTitle->isSpecialPage() ) {
@@ -34,7 +34,7 @@ class Hooks {
 					foreach ( $whitelistedPages as $page ) {
 						if ( $currentPageTitle->isSpecial( $page ) ) {
 							$result = str_replace( '&#58;', ':', strip_tags(
-									$wgOut->parseInline(
+									$wgOut->parseInlineAsInterface(
 										'<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>'
 									)
 								) );
