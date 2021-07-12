@@ -39,13 +39,13 @@
 							card.appendChild( div );
 						} );
 						card.addEventListener( 'mouseleave', function() {
-							document.querySelectorAll( '.hoverimage' ).forEach( function( card ) {
-								card.parentNode.removeChild( card );
+							document.querySelectorAll( '.hoverimage' ).forEach( function( cardElement ) {
+								cardElement.parentNode.removeChild( cardElement );
 							} );
 						} );
 						card.addEventListener( 'wheel', function() {
-							document.querySelectorAll( '.hoverimage' ).forEach( function( card ) {
-								card.parentNode.removeChild( card );
+							document.querySelectorAll( '.hoverimage' ).forEach( function( cardElement ) {
+								cardElement.parentNode.removeChild( cardElement );
 							} );
 						} );
 					} else {
