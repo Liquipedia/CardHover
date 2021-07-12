@@ -9,6 +9,10 @@ use Title;
 
 class Hooks {
 
+	/**
+	 *
+	 * @var array
+	 */
 	private static $filePaths = [];
 
 	/**
@@ -25,7 +29,9 @@ class Hooks {
 				$result = '';
 			} elseif ( $currentPageTitle->getNamespace() >= NS_MAIN ) {
 				$result = str_replace( '&#58;', ':', strip_tags(
-						$wgOut->parseInlineAsInterface( '<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>' )
+						$wgOut->parseInlineAsInterface(
+							'<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>'
+						)
 					) );
 			} else {
 				if ( $currentPageTitle->isSpecialPage() ) {
