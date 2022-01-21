@@ -1,6 +1,6 @@
 {
 	"name": "Card Hover",
-	"version": "1.4.1",
+	"version": "1.5.0",
 	"author": [
 		"PhiLtheFisH",
 		"[https://fo-nttax.de Alex Winkler]"
@@ -18,18 +18,17 @@
 		]
 	},
 	"AutoloadNamespaces": {
-		"Liquipedia\\CardHover\\": "src/"
+		"Liquipedia\\Extension\\CardHover\\": "src/"
+	},
+	"HookHandlers": {
+		"Main": {
+			"class": "\\Liquipedia\\Extension\\CardHover\\Hooks\\MainHookHandler"
+		}
 	},
 	"Hooks": {
-		"BeforePageDisplay": [
-			"Liquipedia\\CardHover\\Hooks::onBeforePageDisplay"
-		],
-		"HtmlPageLinkRendererBegin": [
-			"Liquipedia\\CardHover\\Hooks::onHtmlPageLinkRendererBegin"
-		],
-		"ThumbnailBeforeProduceHTML": [
-			"Liquipedia\\CardHover\\Hooks::onThumbnailBeforeProduceHTML"
-		]
+		"BeforePageDisplay": "Main",
+		"HtmlPageLinkRendererBegin": "Main",
+		"ThumbnailBeforeProduceHTML": "Main"
 	},
 	"ResourceModules": {
 		"ext.cardHover": {

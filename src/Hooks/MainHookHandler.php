@@ -1,38 +1,57 @@
 <?php
 
-namespace Liquipedia\CardHover;
+namespace Liquipedia\Extension\CardHover\Hooks;
 
+use HtmlArmor;
+use Mediawiki\Hook\BeforePageDisplayHook;
+use Mediawiki\Hook\ThumbnailBeforeProduceHTMLHook;
+use MediaWiki\Linker\Hook\HtmlPageLinkRendererBeginHook;
 use MediaWiki\Linker\LinkRenderer;
+use MediaWiki\Linker\LinkTarget;
 use MediaWiki\MediaWikiServices;
 use MWNamespace;
+use OutputPage;
+use ThumbnailImage;
 use Title;
 
-class Hooks {
+class MainHookHandler implements
+	BeforePageDisplayHook,
+	HtmlPageLinkRendererBeginHook,
+	ThumbnailBeforeProduceHTMLHook
+{
+
+	/**
+	 * @param OutputPage $out
+	 * @param Skin $skin
+	 */
+	public function onBeforePageDisplay( $out, $skin ): void {
+		$out->addModules( 'ext.cardHover' );
+	}
 
 	/**
 	 *
 	 * @var array
 	 */
-	private static $filePaths = [];
+	private $filePaths = [];
 
 	/**
 	 * @param LinkTarget $target
 	 * @return string
 	 */
-	private static function getFilePath( $target ) {
+	private function getFilePath( $target ) {
 		$config = MediaWikiServices::getInstance()->getMainConfig();
 		$text = $target->getText();
-		if ( !array_key_exists( $text, self::$filePaths ) ) {
+		if ( !array_key_exists( $text, $this->filePaths ) ) {
 			global $wgOut;
 			$currentPageTitle = $wgOut->getTitle();
 			if ( $currentPageTitle === null ) {
 				$result = '';
 			} elseif ( $currentPageTitle->getNamespace() >= NS_MAIN ) {
 				$result = str_replace( '&#58;', ':', strip_tags(
-						$wgOut->parseInlineAsInterface(
-							'<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>'
-						)
-					) );
+					$wgOut->parseInlineAsInterface(
+						'<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>'
+					)
+				) );
 			} else {
 				if ( $currentPageTitle->isSpecialPage() ) {
 					$done = false;
@@ -40,10 +59,10 @@ class Hooks {
 					foreach ( $whitelistedPages as $page ) {
 						if ( $currentPageTitle->isSpecial( $page ) ) {
 							$result = str_replace( '&#58;', ':', strip_tags(
-									$wgOut->parseInlineAsInterface(
-										'<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>'
-									)
-								) );
+								$wgOut->parseInlineAsInterface(
+									'<p>{{#show:' . $target->getText() . '|?has filepath|link=none}}</p>'
+								)
+							) );
 							$done = true;
 						}
 					}
@@ -58,24 +77,24 @@ class Hooks {
 				$result = '';
 			}
 			if ( !empty( $result ) ) {
-				self::$filePaths[ $text ] = $result;
+				$this->filePaths[ $text ] = $result;
 			} else {
-				self::$filePaths[ $text ] = '';
+				$this->filePaths[ $text ] = '';
 			}
 		}
-		return self::$filePaths[ $text ];
+		return $this->filePaths[ $text ];
 	}
 
 	/**
 	 * @param LinkRenderer $linkRenderer
 	 * @param LinkTarget $target
-	 * @param string &$text
-	 * @param array &$extraAttribs
+	 * @param string|HtmlArmor|null &$text
+	 * @param array &$customAttribs
 	 * @param array &$query
 	 * @param string|null &$ret
 	 */
-	public static function onHtmlPageLinkRendererBegin(
-		LinkRenderer $linkRenderer, $target, &$text, &$extraAttribs, &$query, &$ret
+	public function onHtmlPageLinkRendererBegin( $linkRenderer, $target, &$text,
+		&$customAttribs, &$query, &$ret
 	) {
 		if (
 			empty( $query )
@@ -87,24 +106,26 @@ class Hooks {
 				$target->getParentCategories()
 			)
 		) {
-			$url = self::getFilePath( $target );
+			$url = $this->getFilePath( $target );
 			if ( !empty( $url ) ) {
-				$extraAttribs[ 'data-img' ] = $url;
-				if ( array_key_exists( 'class', $extraAttribs ) ) {
-					$extraAttribs[ 'class' ] .= ' hovercard';
+				$customAttribs[ 'data-img' ] = $url;
+				if ( array_key_exists( 'class', $customAttribs ) ) {
+					$customAttribs[ 'class' ] .= ' hovercard';
 				} else {
-					$extraAttribs[ 'class' ] = 'hovercard';
+					$customAttribs[ 'class' ] = 'hovercard';
 				}
 			}
 		}
 	}
 
 	/**
-	 * @param Thumbnail $thumbnail
+	 * @param ThumbnailImage $thumbnail
 	 * @param array &$attribs
 	 * @param array &$linkAttribs
 	 */
-	public static function onThumbnailBeforeProduceHTML( $thumbnail, &$attribs, &$linkAttribs ) {
+	public function onThumbnailBeforeProduceHTML( $thumbnail, &$attribs,
+		&$linkAttribs
+	) {
 		if ( is_array( $linkAttribs ) && array_key_exists( 'title', $linkAttribs ) ) {
 			$target = Title::newFromText( $linkAttribs[ 'title' ], NS_MAIN );
 			if (
@@ -116,7 +137,7 @@ class Hooks {
 					$target->getParentCategories()
 				)
 			) {
-				$url = self::getFilePath( $target );
+				$url = $this->getFilePath( $target );
 				if ( !empty( $url ) ) {
 					$linkAttribs[ 'data-img' ] = $url;
 					if ( array_key_exists( 'class', $linkAttribs ) ) {
@@ -127,16 +148,6 @@ class Hooks {
 				}
 			}
 		}
-	}
-
-	/**
-	 * @param OutputPage $out
-	 * @param Skin $skin
-	 * @return bool
-	 */
-	public static function onBeforePageDisplay( $out, $skin ) {
-		$out->addModules( 'ext.cardHover' );
-		return true;
 	}
 
 }
